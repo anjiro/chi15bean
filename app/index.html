@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, user-scalable=no
+		initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+	<title>LightBlue Bean - Co-located workshop</title>
+
+	<script src="jquery-2.1.3.min.js"></script>
+	<script src="cordova.js"></script>
+	<script src="libs/easy-ble.js"></script>
+	<script src="app.js"></script>
+	<script src="userCode.js"></script>
+	
+	<style>
+		@import 'evothings-app.css';
+
+		input[type=range] {
+		    -webkit-appearance: none;
+		    background-color: silver;
+		    width: 100%;
+		    height:20px;
+		    margin-top: 15px;
+		    margin-bottom: 15px;
+		}
+
+		input[type="range"]::-webkit-slider-thumb {
+		     -webkit-appearance: none;
+		     border-radius: 2px;
+		    background-color: red;
+		    opacity: 1;
+		    width: 40px;
+		    height: 30px;
+		}
+
+		#redLed::-webkit-slider-thumb {
+		    background-color: red;
+		}
+
+		#greenLed::-webkit-slider-thumb {
+		    background-color: green;
+		}
+
+		#blueLed::-webkit-slider-thumb {
+		    background-color: blue;
+		}
+
+		p.temperatureLabel {
+			font-size: xx-large;
+			text-align: center;
+		}
+
+		p.topic {
+			font-weight: bold;
+		}
+
+	</style>
+
+</head>
+
+<body ontouchstart="">
+	<header>
+		<button class="back" onclick="history.back()">
+			<img src="gfx/arrow_left.svg" />
+		</button>
+		<img class="logotype" src="gfx/logo.svg" alt="Evothings" />
+	</header>
+
+	<h1>Co-located workshop</h1>
+	
+	<h2>Enter the name of your LightBlue Bean</h2>
+
+	<input id="BLEId" value="LightBlueBean2" type="url">
+	<button id="BLEButton" class="green" onclick="app.connect(user)">
+		CONNECT
+	</button>
+
+	<button id="SFButton" onclick="user.onSpark(app)">Spark</button>
+
+	<br>
+
+	<p><b>Status:</b> <span id="BLEStatus">Not connected</span></p>
+
+	<div id="temperatureDisplay" style="display:none">
+		<hr>
+		<p class="topic">Temperature</p>
+		<p class="temperatureLabel"><span id="temperature">N/A</span> C&deg;</p>
+	</div>
+
+	<div id="ledControl" style="display:none">
+		<hr>
+		<p class="topic">LED control</p>
+		<input type="range" id="redLed" min="0" max="255" step="1"
+			value="0" onchange="user.sendLedUpdate()"><br>
+		<input type="range" id="greenLed" min="0" max="255" step="1"
+			value="0" onchange="user.sendLedUpdate()"><br>
+		<input type="range" id="blueLed" min="0" max="255" step="1"
+			value="0" onchange="user.sendLedUpdate()"><br>
+	</div>
+
+</body>
+
+</html>
